@@ -109,7 +109,7 @@ namespace NTwain
       if (_pumpThreadMarshaller == null) return EnableSourceReal(showUI, uiOnly);
 
       var sts = default(STS);
-      _pumpThreadMarshaller.Send(_ =>
+      _pumpThreadMarshaller.Post(_ =>
       {
         sts = EnableSourceReal(showUI, uiOnly);
       }, null);
@@ -152,7 +152,7 @@ namespace NTwain
       if (_pumpThreadMarshaller == null) return DisableSourceReal();
 
       var sts = default(STS);
-      _pumpThreadMarshaller.Send(_ =>
+      _pumpThreadMarshaller.Post(_ =>
       {
         sts = DisableSourceReal();
       }, null);

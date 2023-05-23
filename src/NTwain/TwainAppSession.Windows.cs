@@ -42,8 +42,8 @@ namespace NTwain
     {
       if (_wpfhook == null)
       {
-        _wpfhook = HwndSource.FromHwnd(_hwnd);
-        _wpfhook.AddHook(WpfHook);
+          _wpfhook = HwndSource.FromHwnd(_hwnd);
+          _wpfhook.AddHook(WpfHook);
       }
     }
     /// <summary>
@@ -69,7 +69,7 @@ namespace NTwain
       return IntPtr.Zero;
     }
 
-    private bool WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
+    public bool WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
     {
       // this handles the message from a typical WndProc message loop and checks if it's for the TWAIN source.
       bool handled = false;

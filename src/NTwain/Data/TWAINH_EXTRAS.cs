@@ -955,6 +955,19 @@ namespace NTwain.Data
       return arr;
     }
 
+    public IEnumerable<TW_INFO> GetInfos()
+    {
+        if (NumInfos == 0)
+            yield break;
+        
+        for (var i = 0; i < NumInfos; i++)
+        {
+            TW_INFO info = default;
+            Get(i, ref info);
+            yield return info;
+        }
+    }
+
     /// <summary>
     /// Frees all data contained here.
     /// </summary>
