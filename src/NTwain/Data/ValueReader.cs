@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -506,19 +507,6 @@ namespace NTwain.Data
       }
     }
 
-    static TEnum NumericToEnum<TNumber, TEnum>(TNumber num) where TEnum : struct
-    {
-      // TODO: some caps returns a data type that's not the underlying datatype for the enum 
-      // so foolproof way is to ToString() it and parse it as the enum type.
-      // this is bad for perf so find better way later
-      var str = num!.ToString();
-
-      if (Enum.TryParse(str, out TEnum parsed))
-      {
-        return parsed;
-      }
-      return default;
-    }
-
+    static TEnum NumericToEnum<TNumber, TEnum>(TNumber num) where TEnum : struct where TNumber : INumber<TNumber> => (TEnum)Enum.ToObject(typeof(TEnum), num);
   }
 }

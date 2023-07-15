@@ -3,25 +3,16 @@
   <PropertyGroup>
     <PackageId>NTwain</PackageId>
     <Description>Library containing the TWAIN API for dotnet.</Description>
-    <TargetFrameworks>net6.0;net6.0-windows;net7.0;net7.0-windows</TargetFrameworks>
+    <TargetFrameworks>net7.0;net7.0-windows;net8.0;net8.0-windows</TargetFrameworks>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net462' OR $(TargetFramework.EndsWith('windows'))">
-    <UseWindowsForms>true</UseWindowsForms>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net462'">
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <!--<PackageReference Include="System.Buffers" Version="4.5.1" />-->
-    <PackageReference Include="System.Memory" Version="4.5.5" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net462'">
+  <ItemGroup>
     <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
   </ItemGroup>
+
   <ItemGroup Condition="'$(Configuration)'!='Release'">
     <None Remove="runtimes\win-x64\native\TWAINDSM.dll" />
     <None Remove="runtimes\win-x86\native\TWAINDSM.dll" />
@@ -45,9 +36,5 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DSMGenerator.dummy</LastGenOutput>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 </Project>
