@@ -293,7 +293,7 @@ namespace NTwain.Data
     }
 
     // dynamic is a cheap hack to sidestep the compiler restrictions if I know TValue is numeric
-    class DynamicEnumerator : IEnumerator<TValue>
+    private sealed class DynamicEnumerator : IEnumerator<TValue>
     {
       private readonly TValue _min;
       private readonly TValue _max;
