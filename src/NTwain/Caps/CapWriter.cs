@@ -108,5 +108,7 @@ namespace NTwain.Caps
       twcap.Free(_twain);
       return LastSTS;
     }
+
+    public override string ToString() => $"{(ushort)Cap};{Cap};{Introduced};False;";
   }
 }

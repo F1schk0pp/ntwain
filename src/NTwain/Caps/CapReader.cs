@@ -100,5 +100,7 @@ namespace NTwain.Caps
       };
       return Array.Empty<string>();
     }
+
+    public override string ToString() => $"{(ushort)Cap};{Cap};{Introduced};True;";
   }
 }
