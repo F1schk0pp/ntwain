@@ -12,7 +12,7 @@ namespace NTwain
   /// For use under Windows to host a message pump in non-winform/wpf apps.
   /// This is highly experimental.
   /// </summary>
-  class MessagePumpThread
+  sealed class MessagePumpThread
   {
     DummyForm? _dummyForm;
     TwainAppSession? _twain;
@@ -111,7 +111,7 @@ namespace NTwain
       Debug.WriteLine("TWAIN pump thread ended");
     }
 
-    class DummyForm : Form
+    sealed class DummyForm : Form
     {
       public DummyForm()
       {

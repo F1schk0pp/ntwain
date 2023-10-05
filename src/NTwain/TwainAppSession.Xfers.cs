@@ -66,7 +66,7 @@ namespace NTwain
       {
         do
         {
-          var readyArgs = new TransferReadyEventArgs(pending.Count, (TWEJ)pending.EOJ);
+          var readyArgs = new TransferReadyEventArgs(this, pending.Count, (TWEJ)pending.EOJ);
           try
           {
             TransferReady?.Invoke(this, readyArgs);

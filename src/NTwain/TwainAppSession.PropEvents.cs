@@ -86,6 +86,8 @@ namespace NTwain
               var lockedPtr = Lock(data.hData);
               var bytes = new byte[data.InfoLength];
               Marshal.Copy(lockedPtr, bytes, 0, bytes.Length);
+
+              return bytes;
             }
             finally
             {

@@ -293,7 +293,7 @@ namespace NTwain.Data
     }
 
     // dynamic is a cheap hack to sidestep the compiler restrictions if I know TValue is numeric
-    class DynamicEnumerator : IEnumerator<TValue>
+    sealed class DynamicEnumerator : IEnumerator<TValue>
     {
       private readonly TValue _min;
       private readonly TValue _max;
@@ -941,18 +941,17 @@ namespace NTwain.Data
     /// Reads the info out of this as array.
     /// </summary>
     /// <returns></returns>
-    public TW_INFO[] AsInfos()
+    public IEnumerable<TW_INFO> GetInfos()
     {
-      if (NumInfos == 0) return Array.Empty<TW_INFO>();
+        if (NumInfos == 0)
+            yield break;
 
-      var arr = new TW_INFO[NumInfos];
-      for (var i = 0; i < NumInfos; i++)
-      {
-        TW_INFO blah = default;
-        Get(i, ref blah);
-        arr[i] = blah;
-      }
-      return arr;
+        for (var i = 0; i < NumInfos; i++)
+        {
+            TW_INFO info = default;
+            Get(i, ref info);
+            yield return info;
+        }
     }
 
     /// <summary>

@@ -11,6 +11,7 @@ namespace NTwain
 
   partial class TwainAppSession
   {
+      public event Action<MSG>? OnMessageReceived;
 
     delegate ushort LegacyIDCallbackDelegate(
       ref TW_IDENTITY_LEGACY origin, ref TW_IDENTITY_LEGACY dest,
@@ -90,7 +91,7 @@ namespace NTwain
     private void HandleSourceMsg(MSG msg, [CallerMemberName] string? caller = null)
     {
       Debug.WriteLine($"[thread {Environment.CurrentManagedThreadId}] {nameof(HandleSourceMsg)} called by {caller} at state {State} with {msg}.");
-
+      OnMessageReceived?.Invoke(msg);
       // the reason we post these to the background is
       // if they're coming from UI message loop then
       // this needs to return asap
