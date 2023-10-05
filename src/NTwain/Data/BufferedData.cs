@@ -17,14 +17,14 @@ namespace NTwain.Data
     internal BufferedData(int size)
     {
       _buffer = MemPool.Rent(size);
-      _length = size;
+      Length = size;
       _fromPool = true;
     }
 
     internal BufferedData(byte[] data, int size, bool fromPool)
     {
       _buffer = data;
-      _length = size;
+      Length = size;
       _fromPool = fromPool;
     }
 
@@ -40,7 +40,7 @@ namespace NTwain.Data
     /// <summary>
     /// Actual usable data length in the buffer.
     /// </summary>
-    int _length;
+    public int Length { get; }
 
     /// <summary>
     /// As a span of usable data.
@@ -50,7 +50,7 @@ namespace NTwain.Data
     public ReadOnlySpan<byte> AsSpan()
     {
       if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-      return _buffer.AsSpan(0, _length);
+      return _buffer.AsSpan(0, Length);
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ namespace NTwain.Data
     public ReadOnlyMemory<byte> AsMemory()
     {
       if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-      return _buffer.AsMemory(0, _length);
+      return _buffer.AsMemory(0, Length);
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ namespace NTwain.Data
     public Stream AsStream()
     {
       if (_disposed) throw new ObjectDisposedException(GetType().FullName);
-      return new MemoryStream(_buffer, 0, _length, false);
+      return new MemoryStream(_buffer, 0, Length, false);
     }
 
     public void Dispose()
