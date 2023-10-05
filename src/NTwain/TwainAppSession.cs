@@ -1,9 +1,7 @@
 ﻿using NTwain.Data;
 using NTwain.Triplets;
 using System;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,6 +11,9 @@ namespace NTwain
 
   public partial class TwainAppSession : IDisposable
   {
+      public static bool UseShippedDsmInsteadOfInstalled = false;
+      public static string? WinFormsMessagePumpProcessText = "Twain Worker";
+
     /// <summary>
     /// Creates TWAIN session with current app info.
     /// </summary>
@@ -26,7 +27,8 @@ namespace NTwain
     public TwainAppSession(TW_IDENTITY_LEGACY appId)
     {
 #if WINDOWS || NETFRAMEWORK
-      DSM.DsmLoader.TryLoadCustomDSM();
+        if (UseShippedDsmInsteadOfInstalled)
+            DSM.DsmLoader.TryLoadCustomDSM();
 #endif
       _appIdentity = appId;
 

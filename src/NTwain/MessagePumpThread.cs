@@ -115,6 +115,7 @@ namespace NTwain
     {
       public DummyForm()
       {
+        Text = TwainAppSession.WinFormsMessagePumpProcessText;
         ShowInTaskbar = false;
         WindowState = FormWindowState.Minimized;
       }
